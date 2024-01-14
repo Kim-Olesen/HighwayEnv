@@ -92,7 +92,7 @@ class HighwayEnv(AbstractEnv):
                 vehicle.randomize_behavior()
                 self.road.vehicles.append(vehicle)
 
-    def _reward(self, action: Action) -> float:
+    def _reward(self, action: int) -> float:
         """
         The reward is defined to foster driving at high speed, on the rightmost lanes, and to avoid collisions.
         :param action: the last action performed
@@ -114,7 +114,7 @@ class HighwayEnv(AbstractEnv):
         reward *= rewards["on_road_reward"]
         return reward
 
-    def _rewards(self, action: Action) -> Dict[Text, float]:
+    def _rewards(self, action: int) -> Dict[Text, float]:
         neighbours = self.road.network.all_side_lanes(self.vehicle.lane_index)
         lane = (
             self.vehicle.target_lane_index[2]
